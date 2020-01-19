@@ -1,12 +1,14 @@
 package top.jlpan;
 
 import top.jlpan.config.GenConfig;
-import top.jlpan.model.temp.TableExecHelper;
+import top.jlpan.data.ITableService;
+import top.jlpan.data.TableServiceImpl;
+import top.jlpan.model.Table;
+import top.jlpan.gen.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author panliang
@@ -19,65 +21,41 @@ public class GenApplication {
 
     public static void main(String[] args) {
 
-        /** 参数配置 */
+        /* 参数配置 */
         GenConfig.url = "jdbc:mysql://127.0.0.1:3306/free?usdeUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
         GenConfig.username = "root";
         GenConfig.password = "root";
 
-        HashMap<String, String> tableMap = autoTable();
-        HashMap<String, Object> paramsMap = autoParams();
+        String tableName = "user_account";
 
-        /** 循环生成 */
-        for (Map.Entry<String, String> entry : tableMap.entrySet()) {
+        String absolutePath = "C:\\Users\\Administrator\\Desktop\\自有项目相关资料\\gen\\src\\main\\resources\\test.vm";
+        String classPath = "test.vm";
+        InputStream stream = new ByteArrayInputStream("${tableName}${key}".getBytes());
 
-            String tableName = entry.getValue();
+        HashMap<String, Object> fillMap = new HashMap<>();
+        Table table;
+
+        ITableService tableService = new TableServiceImpl();
+        table = tableService.selectTableByName(tableName);
+        fillMap.put("key", "value");
+
+        /* 绝对路径加载模板 */
+//        AbsoluteTemplateGen gen = new AbsoluteTemplateGen(absolutePath);
+//        gen.initData(fillMap, table);
+//        System.out.println(gen.gen().toString());
 
 
-            exec(paramsMap, tableName);
-        }
-        System.out.println("执行完毕");
+        /* 相对路径加载模板 */
+//        ClassPathTemplateGen gen1 = new ClassPathTemplateGen(classPath);
+//        gen1.initData(fillMap, table);
+//        System.out.println(gen1.gen().toString());
+
+        /* 流文件加载模板 */
+//        StreamTemplateGen gen2 = new StreamTemplateGen(stream);
+//        gen2.initData(fillMap, table);
+//        System.out.println(gen2.gen().toString());
+
     }
-
-    /**
-     * 注入参数
-     * @return
-     */
-    private static HashMap<String, String> autoTable() {
-
-        /** 模块名和数据库名对应关系 */
-        HashMap<String, String> map = new HashMap<>(20);
-        map.put("user_account", "user_account");
-
-        return map;
-    }
-
-    /**
-     * 注入表数据
-     * @return
-     */
-    private static HashMap<String, Object> autoParams() {
-        HashMap<String, Object> map = new HashMap<>(10);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        map.put("createDate", format.format(new Date()));
-        map.put("author", "panliang");
-        map.put("version", "1.0");
-        return map;
-    }
-
-
-    /**
-     * 执行生成
-     * @param paramsMap
-     * @param tableName
-     */
-    private static void exec(HashMap<String, Object> paramsMap, String tableName) {
-        TableExecHelper helper = new TableExecHelper(paramsMap, tableName);
-
-        helper.setModelTemplate("template/service/model.java.vm");
-
-        helper.exec();
-    }
-
 
 }
 

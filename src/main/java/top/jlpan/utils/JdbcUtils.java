@@ -1,6 +1,6 @@
 package top.jlpan.utils;
 
-import top.jlpan.dao.JdbcConnection;
+import top.jlpan.data.jdbc.JdbcConnection;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -18,25 +18,26 @@ public class JdbcUtils {
 
     /**
      * 执行查询的通用SQL
+     *
      * @param sql
      * @param obj
      * @param param
      * @param <T>
      * @return
      */
-    public static <T> ArrayList<T> executeQuery (String sql, Class<T> obj, Object... param) {
+    public static <T> ArrayList<T> executeQuery(String sql, Class<T> obj, Object... param) {
         Connection conn = JdbcConnection.getConnection();
         ResultSet rs;
         try {
             PreparedStatement st = conn.prepareStatement(sql);
-            if(param != null){
-                for(int i = 0; i < param.length; i++){
-                    st.setObject((i+1), param[i]);
+            if (param != null) {
+                for (int i = 0; i < param.length; i++) {
+                    st.setObject((i + 1), param[i]);
                 }
             }
             rs = st.executeQuery();
             ArrayList<T> list = putResult(rs, obj);
-            JdbcConnection.release(conn);
+            conn.close();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,6 +48,7 @@ public class JdbcUtils {
 
     /**
      * 把ResultSet的结果放到java对象中
+     *
      * @param rs
      * @param obj
      * @param <T>
@@ -72,15 +74,15 @@ public class JdbcUtils {
                     }
                     Method method = obj.getMethod("set" + replace, type);
 
-                    if(type.isAssignableFrom(String.class)){
+                    if (type.isAssignableFrom(String.class)) {
                         method.invoke(newInstance, rs.getString(i));
-                    }else if(type.isAssignableFrom(int.class) || type.isAssignableFrom(Integer.class)){
+                    } else if (type.isAssignableFrom(int.class) || type.isAssignableFrom(Integer.class)) {
                         method.invoke(newInstance, rs.getInt(i));
-                    }else if(type.isAssignableFrom(Boolean.class) || type.isAssignableFrom(boolean.class)){
+                    } else if (type.isAssignableFrom(Boolean.class) || type.isAssignableFrom(boolean.class)) {
                         method.invoke(newInstance, rs.getBoolean(i));
-                    }else if(type.isAssignableFrom(Date.class)){
+                    } else if (type.isAssignableFrom(Date.class)) {
                         method.invoke(newInstance, rs.getDate(i));
-                    }else if(type.isAssignableFrom(BigDecimal.class)){
+                    } else if (type.isAssignableFrom(BigDecimal.class)) {
                         method.invoke(newInstance, rs.getBigDecimal(i));
                     }
                 }
@@ -96,6 +98,7 @@ public class JdbcUtils {
 
     /**
      * 数据库命名格式转java命名格式
+     *
      * @param str
      * @return
      */

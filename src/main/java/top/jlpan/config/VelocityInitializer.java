@@ -8,7 +8,7 @@ import java.util.Properties;
 /**
  * @author panliang
  * @version 1.0
- * @ProjectName VelocityInitializer
+ * @ProjectName gen
  * @Description
  * @Date 2019/1/7 9:40
  */
@@ -17,15 +17,14 @@ public class VelocityInitializer {
     /**
      * 加载classpath路径下的模板文件
      */
-    public static void initRelativeResource() {
+    public static void initClassPathResource() {
         Properties p = new Properties();
         try {
             p.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
             p.setProperty(Velocity.ENCODING_DEFAULT, GenConfig.Character);
             p.setProperty(Velocity.OUTPUT_ENCODING, GenConfig.Character);
             Velocity.init(p);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -40,10 +39,29 @@ public class VelocityInitializer {
             p.setProperty(Velocity.ENCODING_DEFAULT, GenConfig.Character);
             p.setProperty(Velocity.OUTPUT_ENCODING, GenConfig.Character);
             Velocity.init(p);
-        }
-        catch (Exception e) {
+            Velocity.init();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+
+    /**
+     * 加载流模板文件
+     */
+    public static void initStreamResource() {
+        Properties p = new Properties();
+        try {
+            p.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, " .");
+            p.setProperty(Velocity.ENCODING_DEFAULT, GenConfig.Character);
+            p.setProperty(Velocity.OUTPUT_ENCODING, GenConfig.Character);
+            p.setProperty("resource.manager.class", "top.jlpan.override.StreamResourceManagerImpl");
+            Velocity.init(p);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 }

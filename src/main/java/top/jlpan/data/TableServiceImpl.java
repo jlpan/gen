@@ -1,8 +1,9 @@
-package top.jlpan.dao;
+package top.jlpan.data;
 
-import top.jlpan.model.table.Column;
-import top.jlpan.model.table.Table;
+import top.jlpan.model.Column;
+import top.jlpan.model.Table;
 import top.jlpan.utils.JdbcUtils;
+import top.jlpan.utils.TableUtils;
 
 import java.util.List;
 
@@ -13,23 +14,11 @@ import java.util.List;
  * @Description
  * @Date 2019/1/8 13:38
  */
-public class TableDao {
-
-    private static volatile TableDao tableDao;
-
-    public static TableDao getInstance() {
-        if (tableDao == null) {
-            synchronized (TableDao.class) {
-                if (tableDao == null) {
-                    tableDao = new TableDao();
-                }
-            }
-        }
-        return tableDao;
-    }
+public class TableServiceImpl implements ITableService {
 
     /**
      * 根据表名查询表信息
+     *
      * @param tableName
      * @return
      */
@@ -40,14 +29,18 @@ public class TableDao {
                 "where table_schema = (select database()) " +
                 "and table_name = ?";
         List<Table> tables = JdbcUtils.executeQuery(sql, Table.class, tableName);
-        if(null != tables && tables.size() == 1) {
-            return tables.get(0);
+        Table table;
+        if (null != tables && tables.size() != 1) {
+            return null;
         }
-        return null;
+        table = tables.get(0);
+        List<Column> columnList = selectTableColumnsByName(tableName);
+        return TableUtils.tableTransJava(table, columnList);
     }
 
     /**
      * 根据表名查询列信息
+     *
      * @param tableName
      * @return
      */
@@ -57,6 +50,9 @@ public class TableDao {
                 "where table_name = ? " +
                 "and table_schema = (select database()) " +
                 "order by ordinal_position";
-        return JdbcUtils.executeQuery(sql, Column.class, tableName);
+        List<Column> columnList = JdbcUtils.executeQuery(sql, Column.class, tableName);
+        return TableUtils.columnTransJava(columnList);
     }
+
+
 }
