@@ -11,7 +11,7 @@ import java.util.List;
  * @author panliang
  * @version 1.0
  * @ProjectName TableDao
- * @Description
+ * @Description 表数据查询实现
  * @Date 2019/1/8 13:38
  */
 public class TableServiceImpl implements ITableService {
@@ -19,9 +19,10 @@ public class TableServiceImpl implements ITableService {
     /**
      * 根据表名查询表信息
      *
-     * @param tableName
-     * @return
+     * @param tableName 表名
+     * @return 表数据
      */
+    @Override
     public Table selectTableByName(String tableName) {
 
         String sql = "select table_name, table_comment, create_time, update_time " +
@@ -41,9 +42,10 @@ public class TableServiceImpl implements ITableService {
     /**
      * 根据表名查询列信息
      *
-     * @param tableName
-     * @return
+     * @param tableName 表名
+     * @return 列数据
      */
+    @Override
     public List<Column> selectTableColumnsByName(String tableName) {
         String sql = "select column_name, data_type, column_comment " +
                 "from information_schema.columns " +

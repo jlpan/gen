@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * @author panliang
  * @version 1.0
  * @ProjectName gen
- * @Description
+ * @Description 数据库表工具类
  * @Date 2019/7/13 12:59
  */
 public class TableUtils {
@@ -28,7 +28,7 @@ public class TableUtils {
     /**
      * java 类型映射集合
      */
-    private static final Map<String, String> javaTypeMap = new HashMap<String, String>();
+    private static final Map<String, String> JAVA_TYPE_MAP = new HashMap<String, String>();
 
     static {
         initJavaTypeMap();
@@ -38,8 +38,8 @@ public class TableUtils {
     /**
      * 数据库列格式化
      *
-     * @param columns
-     * @return
+     * @param columns 列数据
+     * @return 格式化结果
      */
     public static List<Column> columnTransJava(List<Column> columns) {
         List<Column> columnList = new ArrayList<>();
@@ -48,7 +48,7 @@ public class TableUtils {
             column.setAttrLowName(javaName);
             String capName = capToCap(javaName);
             column.setAttrCapName(capName);
-            String attrType = javaTypeMap.get(column.getDataType());
+            String attrType = JAVA_TYPE_MAP.get(column.getDataType());
             column.setAttrType(attrType);
             columnList.add(column);
         }
@@ -58,9 +58,9 @@ public class TableUtils {
     /**
      * 数据库表数据格式化
      *
-     * @param table
-     * @param columns
-     * @return
+     * @param table   表数据
+     * @param columns 列数据
+     * @return 返回的结合表结构数据
      */
     public static Table tableTransJava(Table table, List<Column> columns) {
         String tableName = table.getTableName();
@@ -78,8 +78,8 @@ public class TableUtils {
     /**
      * 下划线转驼峰命名
      *
-     * @param param
-     * @return
+     * @param param 参数
+     * @return 返回值
      */
     private static String toUnderScoreCase(String param) {
         if (param == null || "".equals(param.trim())) {
@@ -97,12 +97,11 @@ public class TableUtils {
     }
 
 
-
     /**
      * 首字符大写
      *
-     * @param str
-     * @return
+     * @param str 字符
+     * @return 转换后
      */
     private static String capToCap(String str) {
         if (Character.isUpperCase(str.charAt(0))) {
@@ -117,27 +116,27 @@ public class TableUtils {
      * 返回状态映射
      */
     private static void initJavaTypeMap() {
-        javaTypeMap.put("tinyint", "Integer");
-        javaTypeMap.put("smallint", "Integer");
-        javaTypeMap.put("mediumint", "Integer");
-        javaTypeMap.put("int", "Integer");
-        javaTypeMap.put("integer", "integer");
-        javaTypeMap.put("bigint", "Long");
-        javaTypeMap.put("float", "Float");
-        javaTypeMap.put("double", "Double");
-        javaTypeMap.put("decimal", "BigDecimal");
-        javaTypeMap.put("bit", "Boolean");
-        javaTypeMap.put("char", "String");
-        javaTypeMap.put("varchar", "String");
-        javaTypeMap.put("tinytext", "String");
-        javaTypeMap.put("text", "String");
-        javaTypeMap.put("mediumtext", "String");
-        javaTypeMap.put("longtext", "String");
-        javaTypeMap.put("time", "Date");
-        javaTypeMap.put("date", "Date");
-        javaTypeMap.put("datetime", "Date");
-        javaTypeMap.put("timestamp", "Date");
-        javaTypeMap.put("decimal ", "BigDecimal");
+        JAVA_TYPE_MAP.put("tinyint", "Integer");
+        JAVA_TYPE_MAP.put("smallint", "Integer");
+        JAVA_TYPE_MAP.put("mediumint", "Integer");
+        JAVA_TYPE_MAP.put("int", "Integer");
+        JAVA_TYPE_MAP.put("integer", "integer");
+        JAVA_TYPE_MAP.put("bigint", "Long");
+        JAVA_TYPE_MAP.put("float", "Float");
+        JAVA_TYPE_MAP.put("double", "Double");
+        JAVA_TYPE_MAP.put("decimal", "BigDecimal");
+        JAVA_TYPE_MAP.put("bit", "Boolean");
+        JAVA_TYPE_MAP.put("char", "String");
+        JAVA_TYPE_MAP.put("varchar", "String");
+        JAVA_TYPE_MAP.put("tinytext", "String");
+        JAVA_TYPE_MAP.put("text", "String");
+        JAVA_TYPE_MAP.put("mediumtext", "String");
+        JAVA_TYPE_MAP.put("longtext", "String");
+        JAVA_TYPE_MAP.put("time", "Date");
+        JAVA_TYPE_MAP.put("date", "Date");
+        JAVA_TYPE_MAP.put("datetime", "Date");
+        JAVA_TYPE_MAP.put("timestamp", "Date");
+        JAVA_TYPE_MAP.put("decimal ", "BigDecimal");
     }
 
 

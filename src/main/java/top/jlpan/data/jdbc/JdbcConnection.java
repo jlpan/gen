@@ -10,7 +10,7 @@ import static top.jlpan.config.GenConfig.*;
  * @author panliang
  * @version 1.0
  * @ProjectName JdbcConnection
- * @Description
+ * @Description jdbc连接
  * @Date 2019/7/17 9:44
  */
 public class JdbcConnection {

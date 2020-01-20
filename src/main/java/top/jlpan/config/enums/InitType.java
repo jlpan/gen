@@ -4,7 +4,7 @@ package top.jlpan.config.enums;
  * @author panliang
  * @version 1.0
  * @ProjectName gen
- * @Description
+ * @Description 初始化类型
  * @Date 2019/7/13 14:15
  */
 public enum InitType {

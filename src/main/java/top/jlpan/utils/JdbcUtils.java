@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author panliang
  * @version 1.0
  * @ProjectName JdbcUtils
- * @Description
+ * @Description jdbc操作封装
  * @Date 2019/1/8 13:52
  */
 public class JdbcUtils {
@@ -19,11 +19,11 @@ public class JdbcUtils {
     /**
      * 执行查询的通用SQL
      *
-     * @param sql
-     * @param obj
-     * @param param
-     * @param <T>
-     * @return
+     * @param sql   sql
+     * @param obj   返回数据类型
+     * @param param 传入参数
+     * @param <T>   泛型
+     * @return 返回数据集
      */
     public static <T> ArrayList<T> executeQuery(String sql, Class<T> obj, Object... param) {
         Connection conn = JdbcConnection.getConnection();
@@ -49,12 +49,12 @@ public class JdbcUtils {
     /**
      * 把ResultSet的结果放到java对象中
      *
-     * @param rs
-     * @param obj
-     * @param <T>
-     * @return
+     * @param rs  ResultSet的结果
+     * @param obj java对象
+     * @param <T> 泛型
+     * @return 返回集合
      */
-    public static <T> ArrayList<T> putResult(ResultSet rs, Class<T> obj) {
+    private static <T> ArrayList<T> putResult(ResultSet rs, Class<T> obj) {
         try {
             ArrayList<T> arrayList = new ArrayList<T>();
             ResultSetMetaData metaData = rs.getMetaData();
@@ -99,10 +99,10 @@ public class JdbcUtils {
     /**
      * 数据库命名格式转java命名格式
      *
-     * @param str
-     * @return
+     * @param str 字符串
+     * @return 返回结果
      */
-    public static String toJavaField(String str) {
+    private static String toJavaField(String str) {
         String[] split = str.split("_");
         StringBuilder builder = new StringBuilder();
         builder.append(split[0]);

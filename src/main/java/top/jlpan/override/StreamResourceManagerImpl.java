@@ -6,7 +6,7 @@ import org.apache.velocity.runtime.resource.*;
  * @author panliang
  * @version 1.0
  * @ProjectName gen
- * @Description
+ * @Description 重写resource管理，兼容流模板读取
  * @Date 2020/1/17 17:47
  */
 public class StreamResourceManagerImpl extends ResourceManagerImpl {
@@ -14,10 +14,10 @@ public class StreamResourceManagerImpl extends ResourceManagerImpl {
     /**
      * 获取资源
      *
-     * @param resourceName
-     * @param resourceType
-     * @param encoding
-     * @return
+     * @param resourceName 资源名
+     * @param resourceType 资源类型
+     * @param encoding     编码
+     * @return 资源
      */
     @Override
     public Resource getResource(final String resourceName, final int resourceType, final String encoding) {
@@ -26,10 +26,11 @@ public class StreamResourceManagerImpl extends ResourceManagerImpl {
 
     /**
      * 加载资源
-     * @param resourceName
-     * @param resourceType
-     * @param encoding
-     * @return
+     *
+     * @param resourceName 资源名
+     * @param resourceType 资源类型
+     * @param encoding     编码
+     * @return 资源
      */
     @Override
     protected Resource loadResource(String resourceName, int resourceType, String encoding) {
@@ -40,9 +41,10 @@ public class StreamResourceManagerImpl extends ResourceManagerImpl {
 
     /**
      * 新建流模板资源文件
-     * @param resourceName
-     * @param resourceType
-     * @return
+     *
+     * @param resourceName 资源名
+     * @param resourceType 资源类型
+     * @return 资源
      */
     @Override
     protected Resource createResource(String resourceName, int resourceType) {

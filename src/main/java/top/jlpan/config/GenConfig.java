@@ -5,7 +5,7 @@ package top.jlpan.config;
  * @author panliang
  * @version 1.0
  * @ProjectName gen
- * @Description
+ * @Description gen整体配置
  * @Date 2019/1/7 9:40
  */
 public class GenConfig {

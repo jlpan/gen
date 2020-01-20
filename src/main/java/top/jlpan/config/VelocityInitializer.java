@@ -9,7 +9,7 @@ import java.util.Properties;
  * @author panliang
  * @version 1.0
  * @ProjectName gen
- * @Description
+ * @Description 模板初始化
  * @Date 2019/1/7 9:40
  */
 public class VelocityInitializer {

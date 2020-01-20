@@ -12,7 +12,7 @@ import java.io.StringWriter;
  * @author panliang
  * @version 1.0
  * @ProjectName gen
- * @Description
+ * @Description 流模板读取
  * @Date 2020/1/19 10:30
  */
 public class StreamTemplateGen extends AbstractTemplateGen {

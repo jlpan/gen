@@ -13,7 +13,7 @@ import java.util.Map;
  * @author panliang
  * @version 1.0
  * @ProjectName gen
- * @Description
+ * @Description 生成器超类
  * @Date 2020/1/19 10:03
  */
 @Data
@@ -41,7 +41,7 @@ public abstract class AbstractTemplateGen implements Gen {
 
     /**
      * 获取模板类型
-     * @return
+     * @return 初始化类型
      */
     abstract InitType getType();
 
@@ -49,7 +49,7 @@ public abstract class AbstractTemplateGen implements Gen {
      * 初始化所有资源
      */
     public void initData(HashMap<String, Object> fillMap, Table table) {
-        this.fillMap = fillMap == null ? new HashMap<>() : fillMap;
+        this.fillMap = fillMap == null ? new HashMap<String, Object>(1) : fillMap;
         this.table = table == null ? new Table() : table;
         initResource();
         initTable();
