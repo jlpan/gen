@@ -1,6 +1,5 @@
 package top.jlpan.gen;
 
-import lombok.Data;
 import org.apache.velocity.VelocityContext;
 import top.jlpan.config.VelocityInitializer;
 import top.jlpan.config.enums.InitType;
@@ -16,18 +15,17 @@ import java.util.Map;
  * @Description 生成器超类
  * @Date 2020/1/19 10:03
  */
-@Data
 public abstract class AbstractTemplateGen implements Gen {
 
     /**
      * 模板填充map
      */
-    HashMap<String, Object> fillMap;
+    private HashMap<String, Object> fillMap;
 
     /**
      * 表信息
      */
-    Table table;
+    private Table table;
 
     /**
      * 模板引擎上下文
@@ -94,4 +92,27 @@ public abstract class AbstractTemplateGen implements Gen {
     }
 
 
+    public HashMap<String, Object> getFillMap() {
+        return fillMap;
+    }
+
+    public void setFillMap(HashMap<String, Object> fillMap) {
+        this.fillMap = fillMap;
+    }
+
+    public Table getTable() {
+        return table;
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
+    }
+
+    public VelocityContext getContext() {
+        return context;
+    }
+
+    public void setContext(VelocityContext context) {
+        this.context = context;
+    }
 }

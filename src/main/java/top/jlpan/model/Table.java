@@ -1,7 +1,5 @@
 package top.jlpan.model;
 
-import lombok.Data;
-
 import java.util.List;
 
 /**
@@ -11,7 +9,6 @@ import java.util.List;
  * @Description 数据库表信息
  * @Date 2019/7/13 16:51
  */
-@Data
 public class Table {
 
     /**
@@ -44,4 +41,64 @@ public class Table {
      */
     private String classLowName;
 
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getTableComment() {
+        return tableComment;
+    }
+
+    public void setTableComment(String tableComment) {
+        this.tableComment = tableComment;
+    }
+
+    public Column getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(Column primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    public List<Column> getColumns() {
+        return columns;
+    }
+
+    public void setColumns(List<Column> columns) {
+        this.columns = columns;
+    }
+
+    public String getClassCapName() {
+        return classCapName;
+    }
+
+    public void setClassCapName(String classCapName) {
+        this.classCapName = classCapName;
+    }
+
+    public String getClassLowName() {
+        return classLowName;
+    }
+
+    public void setClassLowName(String classLowName) {
+        this.classLowName = classLowName;
+    }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "tableName='" + tableName + '\'' +
+                ", tableComment='" + tableComment + '\'' +
+                ", primaryKey=" + primaryKey +
+                ", columns=" + columns +
+                ", classCapName='" + classCapName + '\'' +
+                ", classLowName='" + classLowName + '\'' +
+                '}';
+    }
 }
