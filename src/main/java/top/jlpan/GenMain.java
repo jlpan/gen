@@ -7,6 +7,7 @@ import top.jlpan.gen.ClassPathTemplateGen;
 import top.jlpan.model.Table;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,20 +25,22 @@ import java.util.Scanner;
 @SuppressWarnings("all" )
 public class GenMain {
 
+    private static String origin = "/*gen_origin_sigin*/";
     public static void main(String[] args) {
 
         /* 通用参数配置 */
-        GenConfig.url = "jdbc:mysql://127.0.0.1:3306/farm?usdeUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
-        GenConfig.username = "root";
-        GenConfig.password = "root";
+        GenConfig.url = "jdbc:mysql://139.199.179.144:3306/ruoyi?usdeUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+        GenConfig.username = "ruoyi";
+        GenConfig.password = "ruoyi";
         GenConfig.prefix = "";
 
+
         /* FIXME 本地项目地址  */
-        String root = "C:\\Users\\Administrator\\Desktop\\project";
+        String root = "E:\\project\\gen";
         /* FIXME 表名 */
-        String tableName = "t_user";
+        String tableName = "user";
         /* FIXME 表别名 t_user -> User  */
-        String modelName = "User";
+        String modelName = "user";
 
         /* 自定义数据声明 */
         HashMap<String, Object> fillMap = new HashMap<>();
@@ -47,6 +50,7 @@ public class GenMain {
         fillMap.put("author" , "panliang" );
         fillMap.put("version" , "1.0" );
         fillMap.put("namespace" , "top.jlpan.project.upms" );
+        fillMap.put("origin", origin);
 
         /* 表数据声明 */
         Table table = new TableServiceImpl().selectTableByName(tableName);
@@ -89,6 +93,7 @@ public class GenMain {
      */
     static void writeFile(String path, StringWriter sw) {
         try {
+            String newString = sw.toString();
             System.out.println("路径:" + path + " 生成中...." );
             File file = new File(path);
             if (!file.exists()) {
@@ -98,6 +103,22 @@ public class GenMain {
                     file.createNewFile();
                 }
             } else {
+
+
+                FileInputStream stream = new FileInputStream(file);
+
+                int size=stream.available();
+
+                byte[] buffer=new byte[size];
+
+                stream.read(buffer);
+
+                stream.close();
+                String string = new String(buffer);
+                int originIndex = string.lastIndexOf(origin);
+                String other = string.substring(originIndex + origin.length());
+                String tihuan = newString.substring(0, originIndex + origin.length() + 1);
+
                 while (true) {
                     System.out.println("文件路径:" + path + "已存在,是否选择覆盖，取消或重命名？" );
                     System.out.println("1:覆盖 2:取消 3:重命名" );

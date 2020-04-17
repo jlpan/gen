@@ -72,4 +72,6 @@ public interface ${classCapName}Mapper {
      */
     public int delete${classCapName}ByIds(String[] ${primaryKey.attrLowName}s);
 
+${origin}
+
 }
