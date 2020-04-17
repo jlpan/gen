@@ -47,7 +47,7 @@ public abstract class AbstractTemplateGen implements Gen {
      * 初始化所有资源
      */
     public void initData(HashMap<String, Object> fillMap, Table table) {
-        this.fillMap = fillMap == null ? new HashMap<String, Object>(1) : fillMap;
+        this.fillMap = fillMap == null ? new HashMap<>(1) : fillMap;
         this.table = table == null ? new Table() : table;
         initResource();
         initTable();
@@ -91,28 +91,4 @@ public abstract class AbstractTemplateGen implements Gen {
         }
     }
 
-
-    public HashMap<String, Object> getFillMap() {
-        return fillMap;
-    }
-
-    public void setFillMap(HashMap<String, Object> fillMap) {
-        this.fillMap = fillMap;
-    }
-
-    public Table getTable() {
-        return table;
-    }
-
-    public void setTable(Table table) {
-        this.table = table;
-    }
-
-    public VelocityContext getContext() {
-        return context;
-    }
-
-    public void setContext(VelocityContext context) {
-        this.context = context;
-    }
 }

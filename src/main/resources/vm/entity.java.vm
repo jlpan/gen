@@ -1,0 +1,34 @@
+package ${namespace}.entity;
+
+#foreach ($column in $columns)
+#if($column.attrType == 'Date')
+import java.util.Date;
+#break
+#end
+#end
+#foreach ($column in $columns)
+#if($column.attrType == 'BigDecimal')
+import java.math.BigDecimal;
+#break
+#end
+#end
+
+import lombok.Data;
+
+/**
+ * @author ${author}
+ * @version ${version}
+ * @ProjectName ${classCapName}
+ * @Description ${tableComment}
+ * @Date ${createDate}
+ */
+@Data
+public class ${classCapName} {
+
+#foreach ($column in $columns)
+    /** $column.columnComment */
+    private $column.attrType $column.attrLowName;
+
+#end
+
+}

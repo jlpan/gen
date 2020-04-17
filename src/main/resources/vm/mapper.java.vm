@@ -1,0 +1,75 @@
+package ${namespace}.dao;
+
+import ${namespace}.entity.${classCapName};
+import java.util.List;
+
+/**
+ * @FileName ${classCapName}Mapper.java
+ * @Description: ${tableComment}
+ * @Date ${createDate}
+ * @author ${author}
+ * @version ${version}
+ */
+public interface ${classCapName}Mapper {
+
+    /**
+     * @Title: query${classCapName}
+     * @Description: 查询${tableComment}信息
+     * @param  ${primaryKey.attrLowName} ${tableComment}ID
+     * @return ${tableComment}信息
+     * @author ${author}
+     * @date   ${createDate}
+     */
+    public ${classCapName} query${classCapName}ById(${primaryKey.attrType} ${primaryKey.attrLowName});
+
+    /**
+     * @Title: query${classCapName}List
+     * @Description: 查询${tableComment}列表
+     * @param  ${classLowName} ${tableComment}信息
+     * @return ${tableComment}集合
+     * @author ${author}
+     * @date   ${createDate}
+     */
+    public List<${classCapName}> query${classCapName}List(${classCapName} ${classLowName});
+
+    /**
+     * @Title: add${classCapName}
+     * @Description: 新增${tableComment}
+     * @param  ${classLowName} ${tableComment}信息
+     * @return 结果
+     * @author ${author}
+     * @date   ${createDate}
+     */
+    public int add${classCapName}(${classCapName} ${classLowName});
+
+    /**
+     * @Title: update${classCapName}
+     * @Description: update${classCapName}
+     * @param  ${classLowName} ${tableComment}信息
+     * @return 结果
+     * @author ${author}
+     * @date ${createDate}
+     */
+    public int update${classCapName}(${classCapName} ${classLowName});
+
+    /**
+     * @Title: delete${classCapName}ById
+     * @Description: 删除${tableComment}
+     * @param  ${primaryKey.attrLowName} ${tableComment}ID
+     * @return 结果
+     * @author ${author}
+     * @date ${createDate}
+     */
+    public int delete${classCapName}ById(${primaryKey.attrType} ${primaryKey.attrLowName});
+
+    /**
+     * @Title: delete${classCapName}ByIds
+     * @Description: 批量删除${tableComment}
+     * @param  ${primaryKey.attrLowName}s 需要删除的数据ID
+     * @return 结果
+     * @author ${author}
+     * @date ${createDate}
+     */
+    public int delete${classCapName}ByIds(String[] ${primaryKey.attrLowName}s);
+
+}
