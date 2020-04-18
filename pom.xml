@@ -6,7 +6,7 @@
 
     <groupId>top.jlpan</groupId>
     <artifactId>gen</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
