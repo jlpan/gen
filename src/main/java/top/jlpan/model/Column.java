@@ -40,6 +40,19 @@ public class Column {
      */
     private String attrLowName;
 
+    /**
+     * 扩展字段
+     */
+    private String extra;
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
     public String getColumnName() {
         return columnName;
     }

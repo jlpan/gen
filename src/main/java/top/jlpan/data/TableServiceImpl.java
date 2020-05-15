@@ -47,7 +47,7 @@ public class TableServiceImpl implements ITableService {
      */
     @Override
     public List<Column> selectTableColumnsByName(String tableName) {
-        String sql = "select column_name, data_type, column_comment " +
+        String sql = "select column_name, data_type, column_comment, extra " +
                 "from information_schema.columns " +
                 "where table_name = ? " +
                 "and table_schema = (select database()) " +
